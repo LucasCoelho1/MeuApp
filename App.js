@@ -7,6 +7,8 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { A } from "@expo/html-elements";
 import { StyleSheet, Text, View, Image } from "react-native";
 import { Button } from "react-native";
+import HomeScreen from "./src/screens/HomeScreen";
+import DetailsScreen from "./src/screens/DetailsScreen";
 
 const Stack = createNativeStackNavigator();
 
@@ -31,13 +33,7 @@ export default function App() {
 
 
 
-function DetailsScreen() {
-  return (
-    <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
-      <Text>Details Screen</Text>
-    </View>
-  );
-}
+
 
 // SobreScreen
 // Seu nome e um oi e uma frase de impacto!
