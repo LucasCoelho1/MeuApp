@@ -2,17 +2,17 @@ import { View } from "react-native";
 import { Button, Text } from "react-native-paper";
 import styles from "../utils/styles";
 
-export default function HomeScreen({ navigation }) {
+export default function AboutScreen() {
   return (
     <View style={styles.container}>
-      <Text>Essa é a Home Screen</Text>
+      <Text>Essa é a About Screen</Text>
       <Button
         mode="contained"
         onPress={() => {
-          navigation.navigate("AboutScreen");
+          navigation.navigate("HomeScreen");
         }}
       >
-        Conheça o sobre
+        Volte para o Home
       </Button>
     </View>
   );
