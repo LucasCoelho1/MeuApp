@@ -14,6 +14,33 @@ export default function HomeScreen({ navigation }) {
       >
         Conheça o sobre
       </Button>
+      <br></br>
+      <Button
+        mode="contained"
+        onPress={() => {
+          navigation.navigate("LolScreen");
+        }}
+      >
+        Conheça o Lolo
+      </Button>
+      <br></br>
+      <Button
+        mode="contained"
+        onPress={() => {
+          navigation.navigate("SkinScreen");
+        }}
+      >
+        Conheça as Skins
+      </Button>
+      <br></br>
+      <Button
+        mode="contained"
+        onPress={() => {
+          navigation.navigate("LoginScreen");
+        }}
+      >
+        Faça o login
+      </Button>
     </View>
   );
 }
