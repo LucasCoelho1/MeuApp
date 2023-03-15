@@ -11,18 +11,20 @@ export default function LoginScreen({ navigation }) {
     <View style={styles.container}>
       <Text style={styles.title}>Login</Text>
         <br></br>
+      <View style={styles.bottomDistance}>
       <TextInput
         label="Email"
         value={email}
         onChangeText={(text) => setEmail(text)}
       />
-        <br></br>
+      </View>
+      <View style={styles.bottomDistance}>
       <TextInput
         label="Password"
         value={password}
         onChangeText={(text) => setPassword(text)}
       />
-        <br></br>
+      </View>
       <Button
         mode="contained"
         onPress={() => {

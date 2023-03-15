@@ -6,32 +6,6 @@ export default function HomeScreen({ navigation }) {
   return (
     <View style={styles.container}>
       <Text>Essa é a Home Screen</Text>
-      <Button
-        mode="contained"
-        onPress={() => {
-          navigation.navigate("AboutScreen");
-        }}
-      >
-        Conheça o sobre
-      </Button>
-      <br></br>
-      <Button
-        mode="contained"
-        onPress={() => {
-          navigation.navigate("LolScreen");
-        }}
-      >
-        Conheça o Lolo
-      </Button>
-      <br></br>
-      <Button
-        mode="contained"
-        onPress={() => {
-          navigation.navigate("SkinScreen");
-        }}
-      >
-        Conheça as Skins
-      </Button>
       <br></br>
       <Button
         mode="contained"
