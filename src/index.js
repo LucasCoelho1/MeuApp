@@ -13,7 +13,14 @@ const Stack = createNativeStackNavigator();
 export default function RootNavigation() {
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="SplashScreen">
+      <Stack.Navigator>
+        <Stack.Screen
+          name="SplashScreen"
+          component={SplashScreen}
+          options={{
+            headerShown: false,
+          }}
+        />
         <Stack.Screen
           name="TabsNavigation"
           component={TabsNavigation}
@@ -22,38 +29,10 @@ export default function RootNavigation() {
           }}
         />
         <Stack.Screen
-          name="HomeScreen"
-          component={HomeScreen}
-          options={{
-            title: "Tela Inicial",
-          }}
-        />
-        <Stack.Screen
-          name="AboutScreen"
-          component={AboutScreen}
-          options={{
-            title: "Tela Inicial",
-          }}
-        />
-        <Stack.Screen
-          name="LolScreen"
-          component={LolScreen}
-          options={{
-            title: "Tela Lolo",
-          }}
-        />
-        <Stack.Screen
-          name="SkinScreen"
-          component={SkinScreen}
-          options={{
-            title: "Tela Skins",
-          }}
-        />
-        <Stack.Screen
           name="LoginScreen"
           component={LoginScreen}
           options={{
-            title: "Tela de login",
+            headerShown: true,
           }}
         />
       </Stack.Navigator>
