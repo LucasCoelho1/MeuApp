@@ -5,6 +5,7 @@ import AboutScreen from "./screens/AboutScreen";
 import HomeScreen from "./screens/HomeScreen";
 import LoginScreen from "./screens/LoginScreen";
 import LolScreen from "./screens/LolScreen";
+import RegisterScreen from "./screens/RegisterSreen";
 import SkinScreen from "./screens/SkinScreen";
 import SplashScreen from "./screens/SplashScreen";
 
@@ -31,6 +32,13 @@ export default function RootNavigation() {
         <Stack.Screen
           name="LoginScreen"
           component={LoginScreen}
+          options={{
+            headerShown: true,
+          }}
+        />
+        <Stack.Screen
+          name="RegisterScreen"
+          component={RegisterScreen}
           options={{
             headerShown: true,
           }}
