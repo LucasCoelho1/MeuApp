@@ -54,7 +54,7 @@ function TabsNavigation() {
   return (
     <tabs.Navigator>
       <tabs.Screen
-        name="Home"
+        name="HomeScreen"
         component={HomeScreen}
         options={{
           tabBarLabel: "Tela inicial",
@@ -64,6 +64,11 @@ function TabsNavigation() {
         name="About"
         component={AboutScreen}
         options={{ tabBarLabel: "Tela about" }}
+      />
+      <tabs.Screen
+        name="LoginScreen"
+        component={LoginScreen}
+        options={{ tabBarLabel: "Tela do Lol" }}
       />
       <tabs.Screen
         name="Lol"

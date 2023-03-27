@@ -1,20 +1,25 @@
+import { signInWithEmailAndPassword} from "firebase/auth";
 import * as React from "react";
+import { useState } from "react";
 import { View } from "react-native";
 import { Button, Text, TextInput } from "react-native-paper";
+import { auth } from "../config/firebase";
 import styles from "../utils/styles";
 
 export default function LoginScreen({ navigation }) {
   const [email, setEmail] = React.useState("");
-  const [password, setPassword] = React.useState("");
-function handleLogin() {
-   singInwithEmailAndPassword(auth, email, password)
+  const [password, setPassword] = useState("");
+
+  function handleLogin() {
+    signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         console.log("Usuário logado com sucesso!");
-        navigation.navigate("HomeScreen")
+        navigation.navigate("HomeScreen");
       })
       .catch((error) => {
         console.log("Erro ao logar o usuário: ", error);
-        const errorCode = error.code; //auth/weak-password
+        const errorCode = error.code; 
+        auth/weak-password;
         //mensagem de erro
         if (errorCode === "auth/weak-password") {
           console.log("Senha muito fraca");
@@ -26,7 +31,7 @@ function handleLogin() {
       });
     //codigo erro
   }
-  
+
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Login</Text>
@@ -47,9 +52,7 @@ function handleLogin() {
       </View>
       <Button
         mode="contained"
-        onPress={() => {
-          navigation.navigate("HomeScreen");
-        }}
+        onPress={handleLogin}
       >
         Login
       </Button>
