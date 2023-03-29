@@ -9,6 +9,16 @@ const styles = StyleSheet.create({
     },
     bottomDistance: {
       marginBottom: 20,
+    },
+    Fetchnews:{
+      flex: 1,
+      backgroundColor: "#3B353D",
+      alignItems: "left",
+      justifyContent: "left",
+      color: "white", 
+      border: "3px solid #DBD2D0",
+      borderRadius: 10,
+      padding: 10,
     }
   });
   

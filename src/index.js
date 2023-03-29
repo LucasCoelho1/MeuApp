@@ -2,10 +2,12 @@ import { createMaterialBottomTabNavigator } from "@react-navigation/material-bot
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import AboutScreen from "./screens/AboutScreen";
+import FetchNews from "./screens/FetchNews";
 import HomeScreen from "./screens/HomeScreen";
 import LoginScreen from "./screens/LoginScreen";
 import LolScreen from "./screens/LolScreen";
 import RegisterScreen from "./screens/RegisterSreen";
+import RickMorty from "./screens/RickMorty";
 import SkinScreen from "./screens/SkinScreen";
 import SplashScreen from "./screens/SplashScreen";
 
@@ -80,6 +82,17 @@ function TabsNavigation() {
         component={SkinScreen}
         options={{ tabBarLabel: "Tela Skins" }}
       />
+      <tabs.Screen
+        name="FetchNews"
+        component={FetchNews}
+        options={{ tabBarLabel: "Tela do FetchNews" }}
+      />
+      <tabs.Screen
+        name="RickMorty"
+        component={RickMorty}
+        options={{ tabBarLabel: "Tela do RickMorty" }}
+      />
     </tabs.Navigator>
+    
   );
 }
