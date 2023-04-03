@@ -1,11 +1,18 @@
-import { StyleSheet } from "react-native";
-
-const styles = StyleSheet.create({
+import { Dimensions, StyleSheet } from "react-native";
+const width = Dimensions.get("window").width;
+export const styles = StyleSheet.create({
     container: {
       flex: 1,
       backgroundColor: "#fff",
       alignItems: "center",
       justifyContent: "center",
+    },
+    widthFull:{
+      width: width,
+    },
+    containerFullWidth: {
+      flex: 1,
+      width: width,
     },
     bottomDistance: {
       marginBottom: 20,
