@@ -8,6 +8,7 @@ import LoginScreen from "./screens/LoginScreen";
 import LolScreen from "./screens/LolScreen";
 import RegisterScreen from "./screens/RegisterSreen";
 import RickMorty from "./screens/RickMorty";
+import RMGameScreen from "./screens/RMGameScreen";
 import SkinScreen from "./screens/SkinScreen";
 import SplashScreen from "./screens/SplashScreen";
 
@@ -91,6 +92,11 @@ function TabsNavigation() {
         name="RickMorty"
         component={RickMorty}
         options={{ tabBarLabel: "Tela do RickMorty" }}
+      />
+      <tabs.Screen
+        name="RMGameScreen"
+        component={RMGameScreen}
+        options={{ tabBarLabel: "Tela do RBGameScreen" }}
       />
     </tabs.Navigator>
     
