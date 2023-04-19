@@ -1,14 +1,14 @@
 import { useEffect, useState } from "react";
 import { Image, View } from "react-native";
-import { Button, Text, Modal, Portal } from "react-native-paper";
+import { Button, Text } from "react-native-paper";
 import { styles } from "../utils/styles";
 
 export default function RMGameScreen() {
   const [personagem, setPersonagem] = useState(null);
-  const [personagens, setPersonagens] = useState([]);
   const [totalPersonagens, setTotalPersonagens] = useState(1);
-  const [score, setScore] = useState(0);
-  const [usedCharacters, setUsedCharacters] = useState([]);
+  const [resultado, setResultado] = useState(null);
+  const [pontuacao, setPontuacao] = useState(0);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     fetch("https://rickandmortyapi.com/api/character")
@@ -19,75 +19,113 @@ export default function RMGameScreen() {
   }, []);
 
   useEffect(() => {
-    fetch(
-      "https://rickandmortyapi.com/api/character/" + returnRandomNumber()
-    )
+    BuscarPerson();
+  }, [totalPersonagens]);
+
+  function BuscarPerson() {
+    fetch("https://rickandmortyapi.com/api/character/" + returnRandomNumber())
       .then((response) => response.json())
       .then((json) => {
         setPersonagem(json);
+        setResultado(null);
       });
-  }, [totalPersonagens]);
-
-  function handlePersonagemVivoOuMorto(resposta) {
-    const isAlive = personagem.status === "Alive";
-    const newScore = resposta === isAlive ? score + 1 : score;
-    setScore(newScore);
-
-    const newUsedCharacters = [...usedCharacters, personagem.id];
-    setUsedCharacters(newUsedCharacters);
-
-    setPersonagem(null);
   }
 
-  function returnRandomNumber() {
-    const randomNumber = Math.floor(Math.random() * totalPersonagens) + 1;
-    if (usedCharacters.includes(randomNumber)) {
-      return returnRandomNumber();
+  async function handlePersonagemVivoOuMorto(resposta) {
+    setIsLoading(true);
+    const isAlive = personagem.status === "Alive";
+    if (resposta === isAlive) {
+      setResultado("Parabéns, você acertou!");
+      setPontuacao(pontuacao + 1);
+    } else {
+      setResultado("Que pena, você errou!");
+      setPontuacao(pontuacao - 1);
+    }
+    setTimeout(() => {
+      BuscarPerson();
+      setIsLoading(false);
+    }, 500);
+  }
+
+  const returnRandomNumber = () => {
+    let randomNumber = Math.floor(Math.random() * totalPersonagens) + 1;
+
+    // canoot return 0
+    if (randomNumber === 0) {
+      return 1;
     }
     return randomNumber;
-  }
+  };
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Rick and Morty Game</Text>
-      <Text style={styles.subtitle}>Você sabe se o personagem está vivo?</Text>
-      {personagem && (
-        <View>
-          <Image
-            source={{ uri: personagem.image }}
-            style={{ width: 200, height: 200, marginBottom: 20 }}
-          />
-          <Text style={{ fontSize: 32, textAlign: "center" }}>
-            O/A personagem {personagem.name} está vivo?
-          </Text>
-          <View style={{ flexDirection: "row", justifyContent: 'center', marginTop: 20 }}>
-            <Button
-              mode="contained"
-              onPress={() => handlePersonagemVivoOuMorto(true)}
-              style={{marginRight: 10}}
+      <View
+        style={{
+          border: "7px double black",
+          alignItems: "Center",
+          padding: 30,
+          borderRadius: 10,
+        }}
+      >
+        <Text style={styles.title}>Rick and Morty Game</Text>
+        <Text style={styles.subtitle}>
+          Você sabe este personagem está vivo?
+        </Text>
+        {personagem && (
+          <View>
+            <View
+              style={{
+                alignItems: "center",
+                justifyContent: "center",
+                textAlign: "center",
+              }}
             >
-              SIM
-            </Button>
-            <Button
-              mode="contained"
-              onPress={() => handlePersonagemVivoOuMorto(false)}
+              <Image
+                source={{ uri: personagem.image }}
+                style={{ width: 200, height: 200, marginTop: 20, border: "5px black solid", borderRadius: 20 }}
+              />
+            </View>
+            <Text
+              style={{ fontSize: 25, textAlign: "center", marginVertical: 20 }}
             >
-              NÃO
-            </Button>
+              Como o/a {personagem.name} está?
+            </Text>
+            <View
+              style={{
+                alignItems: "center",
+                flexDirection: "row",
+                justifyContent: "center",
+                textAlign: "center",
+              }}
+            >
+              <View style={{ alignItems: "center", marginRight: 20 }}>
+                <Button
+                  mode="contained"
+                  onPress={() => handlePersonagemVivoOuMorto(true)}
+                  disabled={isLoading}
+                >
+                  Vivo
+                </Button>
+              </View>
+              <View style={{ alignItems: "center", marginRight: 20 }}>
+                <Button
+                  mode="contained"
+                  onPress={() => handlePersonagemVivoOuMorto(false)}
+                  disabled={isLoading}
+                >
+                  Morto
+                </Button>
+              </View>
+            </View>
+            {resultado && (
+              <Text style={{ textAlign: "center", marginVertical: 20 }}>
+                {resultado}
+              </Text>
+            )}
+            <Text style={{ textAlign: "center", marginVertical: 20 }}>Pontuação: {pontuacao}</Text>
           </View>
-        </View>
-      )}
-        <Portal>
-        <Modal visible={!personagem} onDismiss={() => setPersonagem({})}>
-          <View style={styles.modal}>
-            <Text style={styles.modalTitle}>Resultado</Text>
-            <Text style={styles.modalText}>Você acertou {score} de {usedCharacters.length} personagens</Text>
-            <Text style={styles.modalText}>Você errou {score} de {usedCharacters.length} personagens</Text>
-            <br></br><br></br>
-            <Button marginBottom="100" mode="contained" onPress={() => setPersonagem({})}>Jogar Novamente</Button>
-          </View>
-        </Modal>
-        </Portal>
+        )}
+      </View>
     </View>
   );
 }
